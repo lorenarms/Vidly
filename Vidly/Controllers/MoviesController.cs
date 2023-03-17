@@ -5,6 +5,7 @@ namespace Vidly.Controllers
 {
 	public class MoviesController : Controller
 	{
+		// /movies/random
 		public IActionResult Random()
 		{
 			var movie = new Movie()
@@ -13,9 +14,28 @@ namespace Vidly.Controllers
 			};
 
 			return View(movie);
+			//return Content("Hello World!");
+			//return new EmptyResult();
+			//return RedirectToAction("Index", "Home", new {page = 1, sortBy = "name"});
 		}
 
-		public IActionResult NotRandom()
+		[Route("movies/released/{year}/{month:regex(\\d{{2}}):range(1,12)}")]
+		public IActionResult ByReleaseDate(int year, int month)
+		{
+			return Content(year + "/" + month);
+		}
+
+
+		// /movies/edit?id=7
+		
+		public IActionResult Edit(int id)
+		{
+			return Content("id = " + id);
+		}
+
+
+
+		public ActionResult NotRandom()
 		{
 			var movie = new Movie()
 			{
