@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Vidly.Models.Movie>
+
+
+<h2>Movies</h2>
+
+
+@if (!Model.Any())
+{
+	<p>No movies to display.</p>
+}
+else
+{
+	<table class="table table-bordered table-hover">
+		<thead>
+			<tr>
+				<th>Movie Title</th>
+			</tr>
+		</thead>
+		<tbody>
+		@foreach (var movie in Model)
+		{
+
+
+			<tr>
+				<td>@movie.Name</td>
+			</tr>
+
+		}
+		</tbody>
+	</table>
+	
+
+}
