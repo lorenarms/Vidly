@@ -1,0 +1,12 @@
+﻿TO SET CUSTOM LOCATION FOR DATABASE:
+
+1. Open tab SQL SERVER OBJECT EXPLORER
+2. Navigate to SQL SERVER > (LocalDB)... > Databases
+3. Right-click on "Databases" and select "Add new database"
+4. Name the database, give it a custom location
+5. The new database will appear in the list
+6. Right click on the new database; select "Properties"
+7. Find the "Connection String"; note the db name (this will be the same name as you set when creating the db)
+8. In "appsettings.json" find "ConnectionString" "DefaultConnection"
+9. In "DefaultConnection" find "Database=[name]"; replace the current [name] with the name of the new db
+10. run Package Manager Console "update-database"
