@@ -2,3 +2,11 @@
 
 
 <h2>@Model.Name</h2>
+
+<ul>
+	<li>Membership Type: @Model.MembershipType.MembershipTypeName</li>
+	@if (Model.Birthdate != null)
+	{
+		<li>Birthdate: @Model.Birthdate</li>
+	}
+</ul>
