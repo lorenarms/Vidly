@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
+using Microsoft.EntityFrameworkCore;
+using Vidly.Data;
 using Vidly.Models;
 using Vidly.ViewModels;
 
@@ -7,24 +9,39 @@ namespace Vidly.Controllers
 {
 	public class MoviesController : Controller
 	{
-		private IEnumerable<Movie> GetMovies()
+		private ApplicationDbContext _context;
+
+		public MoviesController(ApplicationDbContext context)
 		{
-			return new List<Movie>
-			{
-				new Movie {Name = "Shrek!"},
-				new Movie {Name = "Wall-e"}
-			};
+			_context = context;
 		}
-
-
-
 		public ActionResult Index()
 		{
-			
-			var movies = GetMovies();
+			var movies = _context.Movies.
+				Include(m => m.Genre).ToList();
 
 			return View(movies);
+
 		}
+
+		public IActionResult Details(int id)
+		{
+			var movie = _context.Movies.
+				Include(m => m.Genre).
+				SingleOrDefault(m => m.Id == id);
+
+			if (movie == null)
+			{
+				return new NotFoundResult();
+
+			}
+			return View(movie);
+		}
+
+
+
+
+
 
 
 
