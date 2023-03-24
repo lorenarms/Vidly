@@ -14,6 +14,11 @@ namespace Vidly.Controllers
 		{
 			_context = context;
 		}
+
+		protected override void Dispose(bool disposing)
+		{
+			_context.Dispose();
+		}
 		
 		public IActionResult Index()
 		{
@@ -22,9 +27,7 @@ namespace Vidly.Controllers
 
 			return View(customers);
 		}
-
-
-
+		
 		[Route("customers/{id}")]
 		public IActionResult Details(int id)
 		{
@@ -38,10 +41,15 @@ namespace Vidly.Controllers
 			}
 
 			return View(customer);
+		}
 
-
+		[Route("customers/new")]
+		public IActionResult New()
+		{
+			return View();
 		}
 	}
+
 
 	
 }
