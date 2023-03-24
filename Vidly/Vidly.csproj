@@ -19,12 +19,4 @@
     <Folder Include="App Data\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Views\Customers\New.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="Views\Customers\New.cshtml" />
-  </ItemGroup>
-
 </Project>

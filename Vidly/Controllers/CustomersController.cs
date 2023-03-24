@@ -44,9 +44,42 @@ namespace Vidly.Controllers
 		}
 
 		[Route("customers/new")]
-		public IActionResult New()
+		public ActionResult New()
 		{
-			return View();
+			var membershipTypes = _context.MembershipType.ToList();
+			var viewModel = new CustomerFormViewModel
+			{
+				MembershipTypes = membershipTypes
+			};
+
+			return View("CustomerForm", viewModel);
+		}
+
+		[HttpPost]
+		[Route("customers/create")]
+		public IActionResult Create(Customer customer)
+		{
+			_context.Customers.Add(customer);
+			_context.SaveChanges();
+
+			return RedirectToAction("Index", "Customers");
+		}
+
+
+		public IActionResult Edit(int id)
+		{
+			var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
+			if (customer == null)
+			{
+				return NotFound();
+			}
+
+			var viewModel = new CustomerFormViewModel
+			{
+				Customer = customer,
+				MembershipTypes = _context.MembershipType.ToList()
+			};
+			return View("CustomerForm", viewModel);
 		}
 	}
 
