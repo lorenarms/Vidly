@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Vidly.Data;
 using Vidly.Models;
 using Vidly.ViewModels;
@@ -56,10 +58,27 @@ namespace Vidly.Controllers
 		}
 
 		[HttpPost]
-		[Route("customers/create")]
-		public IActionResult Create(Customer customer)
+		[Route("customers/save")]
+		public IActionResult Save(Customer customer)
 		{
-			_context.Customers.Add(customer);
+			if (customer.Id == 0)
+			{
+				_context.Customers.Add(customer);
+			}
+			else
+			{
+				var customerInDb = _context.Customers.Single(c => c.Id == customer.Id);
+				var config = new MapperConfiguration(cfg => cfg.CreateMap<Customer, Customer>());
+				var mapper = config.CreateMapper();
+				mapper.Map(customer, customerInDb);
+
+				//customerInDb.Name = customer.Name;
+				//customerInDb.Birthdate = customer.Birthdate;
+				//customerInDb.MembershipTypeId = customer.MembershipTypeId;
+				//customerInDb.IsSubscribedToNewsLetter = customer.IsSubscribedToNewsLetter;
+				
+			}
+
 			_context.SaveChanges();
 
 			return RedirectToAction("Index", "Customers");
