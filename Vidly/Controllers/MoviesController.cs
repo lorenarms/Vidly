@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.EntityFrameworkCore;
 using Vidly.Data;
@@ -38,8 +39,54 @@ namespace Vidly.Controllers
 			return View(movie);
 		}
 
+		[Route("/movies/new")]
+		public IActionResult New()
+		{
+			var genreNames = _context.Genre.ToList();
+			var viewModel = new MovieFormViewModel
+			{
+				Genres = genreNames
+			};
+			return View("MovieForm", viewModel);
+		}
 
+		[HttpPost]
+		[Route("movies/save")]
+		public IActionResult Save(Movie movie)
+		{
+			if (movie.Id == 0)
+			{
+				_context.Movies.Add(movie);
+			}
+			else
+			{
+				var movieInDb = _context.Movies.Single(m => m.Id == movie.Id);
+				var config = new MapperConfiguration(cfg => cfg.CreateMap<Movie, Movie>());
+				var mapper = config.CreateMapper();
+				mapper.Map(movie, movieInDb);
+			}
 
+			_context.SaveChanges();
+
+			return RedirectToAction("Index", "Movies");
+
+		}
+
+		public IActionResult Edit(int id)
+		{
+			var movie = _context.Movies.SingleOrDefault(m => m.Id == id);
+			if (movie == null)
+			{
+				return new NotFoundResult();
+			}
+
+			var viewModel = new MovieFormViewModel
+			{
+				Movie = movie,
+				Genres = _context.Genre.ToList()
+			};
+			return View("MovieForm", viewModel);
+		}
 
 
 
@@ -79,15 +126,6 @@ namespace Vidly.Controllers
 		}
 
 
-		// /movies/edit?id=7
-		
-		public IActionResult Edit(int id)
-		{
-			return Content("id = " + id);
-		}
-
-
-
 		public ActionResult NotRandom()
 		{
 			var movie = new Movie()
@@ -97,5 +135,7 @@ namespace Vidly.Controllers
 
 			return View(movie);
 		}
+
+		
 	}
 }
