@@ -20,3 +20,15 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.field-validation-error {
+    color: red
+}
+
+.input-validation-error {
+    border: 2px solid red
+}
+
+.validation-summary-errors {
+    color: red
+}

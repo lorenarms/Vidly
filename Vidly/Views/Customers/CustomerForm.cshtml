@@ -6,9 +6,12 @@
 
 @using (Html.BeginForm("Save", "Customers"))
 {
+	@Html.ValidationSummary();
+
 	<div class="mb-3">
 		@Html.LabelFor(m => m.Customer.Name)
 		@Html.TextBoxFor(m => m.Customer.Name, new { @class = "form-control" })
+		@Html.ValidationMessageFor(m => m.Customer.Name)
 	</div>
 	<div class="mb-3">
 		@Html.LabelFor(m => m.Customer.Birthdate)
@@ -18,6 +21,7 @@
 		@Html.LabelFor(m => m.Customer.MembershipTypeId)
 		@Html.DropDownListFor(m => m.Customer.MembershipTypeId,
 			new SelectList(Model.MembershipTypes, "Id", "MembershipTypeName"), "", new { @class="form-control"})
+		@Html.ValidationMessageFor(m => m.Customer.MembershipTypeId)
 	</div>
 	<div class="mb-3">
 		<label>

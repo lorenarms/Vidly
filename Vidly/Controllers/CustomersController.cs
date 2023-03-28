@@ -69,6 +69,8 @@ namespace Vidly.Controllers
 				.Select(x => new { x.Key, x.Value.Errors })
 				.ToArray();
 
+			var errorsList = ModelState.ToList();
+
 			// customer.MembershipType is always null, bypass here
 			if (!ModelState.IsValid && errors[0].Key != "customer.MembershipType")
 			{
@@ -87,10 +89,13 @@ namespace Vidly.Controllers
 			else
 			{
 				var customerInDb = _context.Customers.Single(c => c.Id == customer.Id);
+
+				// using mapper
 				var config = new MapperConfiguration(cfg => cfg.CreateMap<Customer, Customer>());
 				var mapper = config.CreateMapper();
 				mapper.Map(customer, customerInDb);
 
+				// conventional style
 				//customerInDb.Name = customer.Name;
 				//customerInDb.Birthdate = customer.Birthdate;
 				//customerInDb.MembershipTypeId = customer.MembershipTypeId;
