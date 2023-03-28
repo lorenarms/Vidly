@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Reflection.Metadata.Ecma335;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -52,6 +53,7 @@ namespace Vidly.Controllers
 			var membershipTypes = _context.MembershipType.ToList();
 			var viewModel = new CustomerFormViewModel
 			{
+				Customer = new Customer(),
 				MembershipTypes = membershipTypes
 			};
 
@@ -62,6 +64,22 @@ namespace Vidly.Controllers
 		[Route("customers/save")]
 		public IActionResult Save(Customer customer)
 		{
+			var errors = ModelState
+				.Where(x => x.Value.Errors.Count > 0)
+				.Select(x => new { x.Key, x.Value.Errors })
+				.ToArray();
+
+			// customer.MembershipType is always null, bypass here
+			if (!ModelState.IsValid && errors[0].Key != "customer.MembershipType")
+			{
+				var viewModel = new CustomerFormViewModel
+				{
+					Customer = customer,
+					MembershipTypes = _context.MembershipType.ToList()
+				};
+				return View("CustomerForm", viewModel);
+			}
+
 			if (customer.Id == 0)
 			{
 				_context.Customers.Add(customer);
