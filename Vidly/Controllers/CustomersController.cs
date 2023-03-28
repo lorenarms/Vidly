@@ -61,18 +61,22 @@ namespace Vidly.Controllers
 		}
 
 		[HttpPost]
+		[ValidateAntiForgeryToken]
 		[Route("customers/save")]
 		public IActionResult Save(Customer customer)
 		{
-			var errors = ModelState
-				.Where(x => x.Value.Errors.Count > 0)
-				.Select(x => new { x.Key, x.Value.Errors })
-				.ToArray();
-
-			var errorsList = ModelState.ToList();
-
 			// customer.MembershipType is always null, bypass here
-			if (!ModelState.IsValid && errors[0].Key != "customer.MembershipType")
+			// get list of errors in ModelState
+			var errorCheck = false;
+			var errorsList = ModelState
+				.Where(x => x.Value.Errors.Count > 0)
+				.Select(x => new {x.Key, x.Value.Errors })
+				.ToList();
+
+			if (errorsList.Count <= 1 && errorsList.Any(x => x.Key == "customer.MembershipType"))
+				errorCheck = true;
+			
+			if (!ModelState.IsValid && !errorCheck)
 			{
 				var viewModel = new CustomerFormViewModel
 				{
