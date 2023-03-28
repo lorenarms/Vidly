@@ -45,15 +45,39 @@ namespace Vidly.Controllers
 			var genreNames = _context.Genre.ToList();
 			var viewModel = new MovieFormViewModel
 			{
-				Genres = genreNames
+				Genres = genreNames,
+				Movie = new Movie
+				{
+					DateReleased = DateTime.Parse("1/1/1950")
+				}
 			};
 			return View("MovieForm", viewModel);
 		}
 
 		[HttpPost]
+		[ValidateAntiForgeryToken]
 		[Route("movies/save")]
 		public IActionResult Save(Movie movie)
 		{
+			var errorCheck = false;
+			var errorsList = ModelState
+				.Where(x => x.Value.Errors.Count > 0)
+				.Select(x => new { x.Key, x.Value.Errors })
+				.ToList();
+
+			if (errorsList.Count <= 1 && errorsList.Any(x => x.Key == "movie.Genre"))
+				errorCheck = true;
+
+			if (!ModelState.IsValid && !errorCheck)
+			{
+				var viewModel = new MovieFormViewModel
+				{
+					Movie = movie,
+					Genres = _context.Genre.ToList()
+				};
+				return View("MovieForm", viewModel);
+			}
+
 			if (movie.Id == 0)
 			{
 				_context.Movies.Add(movie);
