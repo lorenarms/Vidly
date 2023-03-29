@@ -1,40 +1,38 @@
 ﻿@model Vidly.ViewModels.CustomerFormViewModel
 
-<h2>New Customer</h2>
+<h2>@Model.Title</h2>
 
 
 
 @using (Html.BeginForm("Save", "Customers"))
 {
-	@*minor issue with customer.MembershipType showing as 'null' creates false validation errors*@
-	@*removing Validation Summary to prevent messages from displaying*@
-	@*@Html.ValidationSummary();*@
+	@Html.ValidationSummary();
 
 	<div class="mb-3">
-		@Html.LabelFor(m => m.Customer.Name)
-		@Html.TextBoxFor(m => m.Customer.Name, new { @class = "form-control" })
-		@Html.ValidationMessageFor(m => m.Customer.Name)
+		@Html.LabelFor(m => m.Name)
+		@Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+		@Html.ValidationMessageFor(m => m.Name)
 	</div>
 	
 	<div class="mb-3">
-		@Html.LabelFor(m => m.Customer.MembershipTypeId)
-		@Html.DropDownListFor(m => m.Customer.MembershipTypeId,
+		@Html.LabelFor(m => m.MembershipTypeId)
+		@Html.DropDownListFor(m => m.MembershipTypeId,
 			new SelectList(Model.MembershipTypes, "Id", "MembershipTypeName"), "Select a Membership Type", new { @class="form-control"})
-		@Html.ValidationMessageFor(m => m.Customer.MembershipTypeId)
+		@Html.ValidationMessageFor(m => m.MembershipTypeId)
 	</div>
 
 	<div class="mb-3">
-		@Html.LabelFor(m => m.Customer.Birthdate)
-		@Html.TextBoxFor(m => m.Customer.Birthdate, "{0:d MMM yyyy}", new { @class = "form-control" })
-		@Html.ValidationMessageFor(m => m.Customer.Birthdate)
+		@Html.LabelFor(m => m.Birthdate)
+		@Html.TextBoxFor(m => m.Birthdate, "{0:d MMM yyyy}", new { @class = "form-control" })
+		@Html.ValidationMessageFor(m => m.Birthdate)
 	</div>
 
 	<div class="mb-3">
 		<label>
-			@Html.CheckBoxFor(m => m.Customer.IsSubscribedToNewsLetter) Subscribed to Newsletter?
+			@Html.CheckBoxFor(m => m.IsSubscribedToNewsLetter) Subscribed to Newsletter?
 		</label>
 	</div>
-	@Html.HiddenFor(m => m.Customer.Id)
+	@Html.HiddenFor(m => m.Id)
 	@Html.AntiForgeryToken()
 	<button type="submit" class="btn btn-primary">Save</button>
 }

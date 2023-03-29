@@ -53,7 +53,7 @@ namespace Vidly.Controllers
 			var membershipTypes = _context.MembershipType.ToList();
 			var viewModel = new CustomerFormViewModel
 			{
-				Customer = new Customer(),
+				//Customer = new Customer(),
 				MembershipTypes = membershipTypes
 			};
 
@@ -65,22 +65,11 @@ namespace Vidly.Controllers
 		[Route("customers/save")]
 		public IActionResult Save(Customer customer)
 		{
-			// customer.MembershipType is always null, bypass here
-			// get list of errors in ModelState
-			var errorCheck = false;
-			var errorsList = ModelState
-				.Where(x => x.Value.Errors.Count > 0)
-				.Select(x => new {x.Key, x.Value.Errors })
-				.ToList();
-
-			if (errorsList.Count <= 1 && errorsList.Any(x => x.Key == "customer.MembershipType"))
-				errorCheck = true;
 			
-			if (!ModelState.IsValid && !errorCheck)
+			if (!ModelState.IsValid)
 			{
 				var viewModel = new CustomerFormViewModel
 				{
-					Customer = customer,
 					MembershipTypes = _context.MembershipType.ToList()
 				};
 				return View("CustomerForm", viewModel);
@@ -121,9 +110,8 @@ namespace Vidly.Controllers
 				return NotFound();
 			}
 
-			var viewModel = new CustomerFormViewModel
+			var viewModel = new CustomerFormViewModel(customer)
 			{
-				Customer = customer,
 				MembershipTypes = _context.MembershipType.ToList()
 			};
 			return View("CustomerForm", viewModel);

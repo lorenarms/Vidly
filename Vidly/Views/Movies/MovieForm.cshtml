@@ -10,6 +10,7 @@
 @using (Html.BeginForm("Save", "Movies"))
 {
 	@Html.ValidationSummary()
+
 	<div class="mb-3">
 		@Html.LabelFor(m => m.Name)
 		@Html.TextBoxFor(m => m.Name, new { @class= "form-control" })
