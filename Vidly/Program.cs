@@ -1,6 +1,11 @@
+using System.Runtime.Serialization;
+using AutoMapper;
+using AutoMapper.Internal;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Vidly.Data;
+using Vidly.Maps;
 
 namespace Vidly
 {
@@ -21,7 +26,17 @@ namespace Vidly
 				.AddEntityFrameworkStores<ApplicationDbContext>();
 			builder.Services.AddControllersWithViews();
 
-			
+
+			// add auto-mapper and initialize
+			// https://stackoverflow.com/questions/40275195/how-to-set-up-automapper-in-asp-net-core
+			var mapperConfig = new MapperConfiguration(mc =>
+			{
+				mc.AddProfile(new MappingProfile());
+			});
+			IMapper mapper = mapperConfig.CreateMapper();
+			builder.Services.AddSingleton(mapper);
+
+
 			var app = builder.Build();
 
 			// Configure the HTTP request pipeline.
@@ -36,6 +51,7 @@ namespace Vidly
 				app.UseHsts();
 			}
 
+			
 			app.UseHttpsRedirection();
 			app.UseStaticFiles();
 
