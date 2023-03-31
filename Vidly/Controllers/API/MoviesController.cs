@@ -25,9 +25,9 @@ namespace Vidly.Controllers.API
 		// GET /api/movies
 		[HttpGet]
 		[Route("/api/movies")]
-		public IEnumerable<MovieDTO> GetMovies()
+		public IActionResult GetMovies()
 		{
-			return _context.Movies.ToList().Select(_mapper.Map<Movie, MovieDTO>);
+			return Ok(_context.Movies.ToList().Select(_mapper.Map<Movie, MovieDTO>));
 		}
 
 
