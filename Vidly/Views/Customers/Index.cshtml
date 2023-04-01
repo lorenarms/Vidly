@@ -61,25 +61,30 @@ else
 }
 
 
+
+
 @section scripts
 {
 	<script>
-		$(document).ready(function () {
+		$(document).ready(function() {
+			$("#customers").DataTable();
 
 			$("#customers .js-delete").on("click", function() {
-				var button = $(this);
-				
-				if (confirm("Are you sure you want to delete this customer?"))
-				$.ajax({
-					url: "/api/customer/" + button.attr("data-customer-id"),
-					method: "DELETE",
-					success: function() {
-						button.parents("tr").remove();
-						console.log("Success!");
-					}
+					var button = $(this);
+					
+					bootbox.confirm("Are you sure you want to delete this customer?", function(result) {
+							if (result) {
+								$.ajax({
+									url: "/api/customer/" + button.attr("data-customer-id"),
+									method: "DELETE",
+									success: function() {
+										button.parents("tr").remove();
+									}
+								});
+							}
+						});
 				});
-			});
 		});
-		
+
 	</script>
 }
