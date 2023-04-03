@@ -28,7 +28,8 @@ namespace Vidly.Controllers.API
 		[Route("/api/movies")]
 		public IActionResult GetMovies()
 		{
-			return Ok(_context.Movies.
+			return Ok(_context.
+				Movies.
 				Include(m => m.Genre).
 				ToList().
 				Select(_mapper.Map<Movie, MovieDTO>));
