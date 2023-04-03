@@ -3,6 +3,7 @@ using AutoMapper;
 using Azure.Core;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Vidly.Data;
 using Vidly.DTOs;
 using Vidly.Models;
@@ -27,7 +28,11 @@ namespace Vidly.Controllers.API
 		[Route("/api/customers")]
 		public IActionResult GetCustomers()
 		{
-			return Ok(_context.Customers.ToList().Select(_mapper.Map<Customer, CustomerDTO>));
+			return Ok(_context.
+				Customers.
+				Include(c => c.MembershipType).
+				ToList().
+				Select(_mapper.Map<Customer, CustomerDTO>));
 		}
 
 		// GET /api/customer/1
