@@ -10,7 +10,7 @@ namespace Vidly.Controllers
 {
 	public class MoviesController : Controller
 	{
-		private ApplicationDbContext _context;
+		private readonly ApplicationDbContext _context;
 
 		public MoviesController(ApplicationDbContext context)
 		{
@@ -51,12 +51,27 @@ namespace Vidly.Controllers
 			return View("MovieForm", viewModel);
 		}
 
+		public IActionResult Edit(int id)
+		{
+			var movie = _context.Movies.SingleOrDefault(m => m.Id == id);
+			if (movie == null)
+			{
+				return new NotFoundResult();
+			}
+
+			var viewModel = new MovieFormViewModel(movie)
+			{
+				Genres = _context.Genre.ToList()
+			};
+			return View("MovieForm", viewModel);
+		}
+
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		[Route("movies/save")]
 		public IActionResult Save(Movie movie)
 		{
-			
+
 			if (!ModelState.IsValid)
 			{
 				var viewModel = new MovieFormViewModel(movie)
@@ -84,23 +99,6 @@ namespace Vidly.Controllers
 
 		}
 
-		public IActionResult Edit(int id)
-		{
-			var movie = _context.Movies.SingleOrDefault(m => m.Id == id);
-			if (movie == null)
-			{
-				return new NotFoundResult();
-			}
-
-			var viewModel = new MovieFormViewModel(movie)
-			{
-				Genres = _context.Genre.ToList()
-			};
-			return View("MovieForm", viewModel);
-		}
-
-
-		
 
 
 
@@ -140,8 +138,7 @@ namespace Vidly.Controllers
 		{
 			return Content(year + "/" + month);
 		}
-
-
+		
 		public ActionResult NotRandom()
 		{
 			var movie = new Movie()

@@ -1,17 +1,7 @@
 ﻿@model IEnumerable<Vidly.Models.Movie>
 
 
-@*
-	TODO: 
-		Add DataTables to this page
-		Call the API using jQuery
-		Add Edit and Delete buttons via javascript
-		Add BootBox for delete confirmation
-		Link edit button to /movies/edit/{id}
-		optimize DataTables to delete from list AND db
-		[] Use a DTO to return the Genre
 
-*@
 
 <h2>Movies</h2>
 
@@ -65,7 +55,7 @@
 				},
 				columns: [
 					{
-						data: "name",
+						data: "name"
 
 					},
 					{

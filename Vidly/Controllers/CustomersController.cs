@@ -1,5 +1,6 @@
 ﻿using System.Reflection.Metadata.Ecma335;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -22,6 +23,7 @@ namespace Vidly.Controllers
 		{
 			_context.Dispose();
 		}
+
 		
 		public IActionResult Index()
 		{

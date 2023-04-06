@@ -1,7 +1,10 @@
 using System.Runtime.Serialization;
 using AutoMapper;
 using AutoMapper.Internal;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Vidly.Data;
@@ -22,9 +25,25 @@ namespace Vidly
 				options.UseSqlServer(connectionString));
 			builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-			builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+			// sign-in verification set to "false" to allow users to sign-in without having to verify email first
+			builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+				.AddDefaultTokenProviders()
+				.AddRoles<IdentityRole>()
 				.AddEntityFrameworkStores<ApplicationDbContext>();
+
 			builder.Services.AddControllersWithViews();
+
+
+
+			//var policy = new AuthorizationPolicyBuilder()
+			//	.RequireAuthenticatedUser()
+			//	//.RequireRole("Admin", "SuperUser")
+			//	.Build();
+
+			//builder.Services.AddMvc(options =>
+			//{
+			//	options.Filters.Add(new AuthorizeFilter(policy));
+			//});
 
 
 			// add auto-mapper and initialize
@@ -59,9 +78,11 @@ namespace Vidly
 
 			app.UseAuthorization();
 
+			// this line required for api access
 			app.MapControllerRoute(
 				name: "default",
 				pattern: "{controller=Home}/{action=Index}/{id?}");
+
 			app.MapRazorPages();
 
 			app.Run();
