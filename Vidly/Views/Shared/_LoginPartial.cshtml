@@ -2,6 +2,20 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
+
+@*
+    To see all pages related to logging in, registering, etc, follow this guide here:
+    https://learn.microsoft.com/en-us/aspnet/core/security/authentication/scaffold-identity?view=aspnetcore-7.0&tabs=visual-studio&viewFallbackFrom=aspnetcore-2.1
+    
+    TL;DR:
+    PM> Install-Package Microsoft.VisualStudio.Web.CodeGeneration.Design
+    Right-click project, select Add>New Scafolded Item, select "Identity"
+    Select to Overwrite All, select the DbContext class
+    Add
+    
+    Find all files in Areas>Pages>Account
+*@
+
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {

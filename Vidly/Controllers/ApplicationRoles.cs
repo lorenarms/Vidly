@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Vidly.Controllers
 {
+	[Authorize]
 	public class ApplicationRoles : Controller
 	{
 		private readonly RoleManager<IdentityRole> _roleManager;
