@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -97,6 +98,7 @@ namespace Vidly.Controllers.API
 		// DELETE /api/movie/{id}
 		[HttpDelete]
 		[Route("/api/movie/{id}")]
+		// [Authorize(Roles = "Admin")]
 		public IActionResult DeleteMovie(int id)
 		{
 			var movieInDb = _context.Movies.FirstOrDefault(m => m.Id == id);

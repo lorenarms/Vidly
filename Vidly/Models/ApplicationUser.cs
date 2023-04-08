@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Identity;
+using Vidly.Controllers;
 
 namespace Vidly.Models
 {
@@ -6,6 +8,10 @@ namespace Vidly.Models
 	{
 		public string FirstName { get; set; }
 		public string LastName { get; set; }
+		public string Role { get; set; }
+
 		
 	}
+
+	
 }
