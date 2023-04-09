@@ -14,36 +14,23 @@ namespace Vidly.Controllers
 	public class ApplicationRoles : Controller
 	{
 		private readonly RoleManager<IdentityRole> _roleManager;
-		private readonly UserManager<IdentityUser> _userManager;
-
 		private ApplicationDbContext _context;
 		
-		public ApplicationRoles(RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager, ApplicationDbContext context)	
+		public ApplicationRoles(RoleManager<IdentityRole> roleManager, ApplicationDbContext context)	
 		{
 			_roleManager = roleManager;
-			_userManager = userManager;
-
 			_context = context;
-
 			
 		}
-
-
-
+		
 		// List all roles created by user
 		public IActionResult Index()
 		{
-			IDictionary<ApplicationUser, string> appUsers = new Dictionary<ApplicationUser, string>();
-			var currUsers = _context.ApplicationUser;
-			foreach (var cu in currUsers)
-			{
-				appUsers.Add(cu, cu.Role);
-			}
-
 			var roles = _roleManager.Roles;
 			return View(roles);
 		}
 
+		// list all users and their roles
 		[Route("/getusersandroles")]
 		public IActionResult GetUsersAndRoles()
 		{
