@@ -1,41 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-
-using System.Security.Claims;
-using Vidly.Data;
-using Vidly.Models;
-
 
 namespace Vidly.Controllers
 {
-	[Authorize(Roles = "Admin")]
-	public class ApplicationRoles : Controller
+	public class ApplicationRolesController : Controller
 	{
 		private readonly RoleManager<IdentityRole> _roleManager;
-		private ApplicationDbContext _context;
-		
-		public ApplicationRoles(RoleManager<IdentityRole> roleManager, ApplicationDbContext context)	
+
+		public ApplicationRolesController(RoleManager<IdentityRole> roleManager)	
 		{
 			_roleManager = roleManager;
-			_context = context;
-			
 		}
-		
+
 		// List all roles created by user
 		public IActionResult Index()
 		{
-			var roles = _roleManager.Roles;
-			return View(roles);
-		}
+			var roles =_roleManager.Roles;
 
-		// list all users and their roles
-		[Route("/getusersandroles")]
-		public IActionResult GetUsersAndRoles()
-		{
-			var usersAndRoles = _context.ApplicationUser;
-			return View(usersAndRoles);
+			return View(roles);
 		}
 
 		[HttpGet]
