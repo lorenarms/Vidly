@@ -34,18 +34,6 @@ namespace Vidly
 			builder.Services.AddControllersWithViews();
 
 
-
-			//var policy = new AuthorizationPolicyBuilder()
-			//	.RequireAuthenticatedUser()
-			//	//.RequireRole("Admin", "SuperUser")
-			//	.Build();
-
-			//builder.Services.AddMvc(options =>
-			//{
-			//	options.Filters.Add(new AuthorizeFilter(policy));
-			//});
-
-
 			// add auto-mapper and initialize
 			// https://stackoverflow.com/questions/40275195/how-to-set-up-automapper-in-asp-net-core
 			var mapperConfig = new MapperConfiguration(mc =>
