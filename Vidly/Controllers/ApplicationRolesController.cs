@@ -4,11 +4,11 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Vidly.Controllers
 {
-	public class ApplicationRoles : Controller
+	public class ApplicationRolesController : Controller
 	{
 		private readonly RoleManager<IdentityRole> _roleManager;
 
-		public ApplicationRoles(RoleManager<IdentityRole> roleManager)	
+		public ApplicationRolesController(RoleManager<IdentityRole> roleManager)	
 		{
 			_roleManager = roleManager;
 		}
@@ -16,7 +16,8 @@ namespace Vidly.Controllers
 		// List all roles created by user
 		public IActionResult Index()
 		{
-			var roles = _roleManager.Roles;
+			var roles =_roleManager.Roles;
+
 			return View(roles);
 		}
 
