@@ -14,12 +14,10 @@ namespace Vidly.Controllers
 	public class ApplicationRoles : Controller
 	{
 		private readonly RoleManager<IdentityRole> _roleManager;
-		private ApplicationDbContext _context;
 		
-		public ApplicationRoles(RoleManager<IdentityRole> roleManager, ApplicationDbContext context)	
+		public ApplicationRoles(RoleManager<IdentityRole> roleManager)	
 		{
 			_roleManager = roleManager;
-			_context = context;
 			
 		}
 		
@@ -30,13 +28,7 @@ namespace Vidly.Controllers
 			return View(roles);
 		}
 
-		// list all users and their roles
-		[Route("/getusersandroles")]
-		public IActionResult GetUsersAndRoles()
-		{
-			var usersAndRoles = _context.ApplicationUser;
-			return View(usersAndRoles);
-		}
+		
 
 		[HttpGet]
 		public IActionResult Create()

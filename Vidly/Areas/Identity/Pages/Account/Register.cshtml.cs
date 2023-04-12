@@ -158,8 +158,7 @@ namespace Vidly.Areas.Identity.Pages.Account
                 // adding names to user
                 user.FirstName = Input.FirstName;
                 user.LastName = Input.LastName;
-                user.Role = Input.Role;
-
+                
 
 				var result = await _userManager.CreateAsync(user, Input.Password);
 
