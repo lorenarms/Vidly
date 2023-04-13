@@ -24,8 +24,15 @@ using Vidly.Models;
 
 namespace Vidly.Areas.Identity.Pages.Account
 {
+    
     public class RegisterModel : PageModel
     {
+        // generic "user" role with limited access
+        public const string Genericrole = "User";
+
+        // admin role with superuser access
+        public const string Adminrole = "Admin";
+
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IUserStore<IdentityUser> _userStore;
@@ -91,6 +98,7 @@ namespace Vidly.Areas.Identity.Pages.Account
             [Display(Name = "Last Name")]
             public string LastName { get; set; }
 
+            
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -121,7 +129,7 @@ namespace Vidly.Areas.Identity.Pages.Account
 
             [Required]
             public string? Role { get; set; }
-
+            
             [ValidateNever]
             
             public IEnumerable<SelectListItem> RoleList { get; set; }
@@ -140,12 +148,16 @@ namespace Vidly.Areas.Identity.Pages.Account
                 {
                     Text = i,
                     Value = i
-                })
+                }),
+                
+                Role = Genericrole
             };
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+            Input.Role ??= Genericrole;
+
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
@@ -159,14 +171,14 @@ namespace Vidly.Areas.Identity.Pages.Account
                 user.FirstName = Input.FirstName;
                 user.LastName = Input.LastName;
                 
-
-				var result = await _userManager.CreateAsync(user, Input.Password);
+                var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
 
                     // add the role to the user
+                    
                     await _userManager.AddToRoleAsync(user, Input.Role);
 
 
