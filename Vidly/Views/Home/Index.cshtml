@@ -1,8 +1,36 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity;
+@model IEnumerable<ApplicationUser>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
+
+
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+	<h1 class="display-4">Welcome</h1>
+	<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+
+<div>
+	<table class="table table-striped">
+		<thead>
+		<tr>
+			<th>First Name</th>
+			<th>Id</th>
+			<th>Role</th>
+		</tr>
+		</thead>
+		<tbody>
+		@foreach (var u in Model)
+		{
+			<tr>
+				<td>@u.FirstName</td>
+				<td>@u.Id</td>
+				<td>@u.Role</td>
+			</tr>
+		}
+		</tbody>
+	</table>
 </div>
