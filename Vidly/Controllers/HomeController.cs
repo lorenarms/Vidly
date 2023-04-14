@@ -12,35 +12,25 @@ namespace Vidly.Controllers
 	public class HomeController : Controller
 	{
 		private readonly ILogger<HomeController> _logger;
-		private readonly UserManager<ApplicationUser> _userManager;
-		private RoleManager<IdentityRole> _roleManager;
 		private ApplicationDbContext _context;
 
         public HomeController(
-	        UserManager<ApplicationUser> userManager,
 	        ILogger<HomeController> logger, 
-	        RoleManager<IdentityRole> roleManager,
 	        ApplicationDbContext context)
 		{
 			_logger = logger;
-			_userManager = userManager;
-			_roleManager = roleManager;
+			
             _context = context;
 		}
 
 		public async Task<IActionResult> Index()
         {
-			var users = await _userManager.Users.ToListAsync();
-			return View(users);
-			//return View();
+
+			return View();
 
 		}
 
-		[HttpGet]
-		public async Task<IActionResult> Edit(string Id)
-		{
-			
-		}
+		
 		
 
 		public IActionResult Privacy()

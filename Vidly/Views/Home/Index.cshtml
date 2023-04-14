@@ -1,5 +1,4 @@
 ﻿@using Microsoft.AspNetCore.Identity;
-@model IEnumerable<ApplicationUser>
 
 @{
     ViewData["Title"] = "Home Page";
@@ -13,24 +12,3 @@
 </div>
 
 
-<div>
-	<table class="table table-striped">
-		<thead>
-		<tr>
-			<th>First Name</th>
-			<th>Id</th>
-			<th>Role</th>
-		</tr>
-		</thead>
-		<tbody>
-		@foreach (var u in Model)
-		{
-			<tr>
-				<td>@u.FirstName</td>
-				<td>@u.Id</td>
-				<td>@u.Role</td>
-			</tr>
-		}
-		</tbody>
-	</table>
-</div>
