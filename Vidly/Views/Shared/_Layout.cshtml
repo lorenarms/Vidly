@@ -20,6 +20,11 @@
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     
     @*DataTables*@
+
+    @*    Copy all lines below to _Layout file
+    Copy all files below to a folder in the project
+    Comment out the line near the end of this file  *@
+
     @*https://www.ezzylearning.net/tutorial/how-to-use-jquery-datatables-with-asp-net-core-web-api*@
     @*https://www.codenerd.co.za/so-a-recent-project-with-blazor-required-that-we-keep-with-html-tables-to-display-data-the-js-datatables-provides-a-sexy-way-of-displaying-data-on-a-web-page-datatables-provide-pagination-search-an/*@
 
@@ -27,13 +32,13 @@
     
     @*Ensure the following file is in the folder; linking to online version will not work properly*@
     <link href="lib/datatables/css/dataTables.twitter-bootstrap.css" rel="stylesheet" />
-
     <link href="lib/datatables/css/dataTables.bootstrap4.css" rel="stylesheet" />
-
     <script src="lib/datatables/js/jquery.dataTables.js"></script>
     <script src="lib/datatables/js/dataTables.bootstrap4.js"></script>
     
+
     @*BootBox*@
+    @*Right click on project and select "manage client side service" and search for "BootBox"*@
     <script src="lib/bootbox.js/bootbox.js"></script>
 
 </head>
@@ -52,10 +57,14 @@
             &copy; 2023 - Vidly - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
-    @*Only one jquery.min.js script file allowed; latest listed will be loaded*@
+
+
+	@*Only one jquery.min.js script file allowed; latest listed will be loaded*@
     @*Comment next line out to enable DataTables*@
 	@*<script src="~/lib/jquery/dist/jquery.min.js"></script>*@
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
