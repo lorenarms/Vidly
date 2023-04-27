@@ -131,7 +131,7 @@ This project was built with the following applications, languages, and libraries
   </tr>
   <tr>
     <td>Movie API "GetAllMovies"</td>
-    <td>Movie API "GetMoiveById"</td>
+    <td>Movie API "GetMovieById"</td>
   </tr>
 </table>
 
