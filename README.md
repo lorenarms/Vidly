@@ -34,7 +34,7 @@
     <a href="https://github.com/lorenarms/Vidly/tree/master/Vidly"><strong>Explore the files »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">View the demo</a>
+    <a href="https://youtu.be/QJqpdvMKIGY">View the demo</a>
     ·
     <a href="https://www.youtube.com/watch?v=ltE63Xm3bh4&list=PLhz6FAyiBzY6kAOeiksSwaB5887EGQIyY">See more projects</a>
     ·
@@ -77,20 +77,30 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
+<p>
+<img src="https://github.com/lorenarms/Vidly/blob/master/Vidly/Screenshots/Movies%20index.png">
+<p/>
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+_Vidly Movies index showing Datatables_
 
+<p>
 This project, called "Vidly", is an ASP.NET Core web application built with C# (and a wee bit'o javascript). The project is a database for a video rental service consisting of a list of Movies to rent and Customers who can rent those movies. The proeject was built folowing the tutorial by Mosh Hamedani, which can be found <a href="https://codewithmosh.com/p/asp-net-mvc">here</a>.
+</p>
+<img src="https://github.com/lorenarms/Vidly/blob/master/Vidly/Screenshots/Movies%20delete%20dialog.png">
 
+_Using BootBox for pop-up dialogs_
+
+<p>
 Why did I choose this course?
 * I am passionate about C# coding and web development, and this course was a great way for me to get familiar with the ASP.NET and Entity frameworks
 * The course is quite old and therefore gave me a great opportunity to practice problem-solving as some of the techniques are outdated (but still work)
 * I think Mosh is awesome and a great teacher, this is not my first course with him! :smile:
-
+</p>
+<p>
 As mentioned above, there were a few things in the course that are no longer applicable because of changes to the way MVC is built in Visual Studio 2022. That's okay! It was a great opportunity for me to work through real-world problems and solve them, and in the end there was *nothing* that I couldn't complete.
 
 Keep reading to see project screenshots and hear about my process!
-
+</p>
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
@@ -125,6 +135,10 @@ This project was built with the following applications, languages, and libraries
     <td>Movie Index</td>
     <td>Movie Edit Webform</td>
   </tr>
+</table>
+<p>
+Vidly also has a working API for both customers and movies. The API can be reached through Postman or a web browser through /api/customers or /api/movies. The API supports GET, POST, PUT, and DELETE for all data.
+<table>
   <tr>
     <td><img src="https://github.com/lorenarms/Vidly/blob/master/Vidly/Screenshots/Movie%20api%20getallmovies.png" alt="MovieAPI" width="auto">
     <td><img src="https://github.com/lorenarms/Vidly/blob/master/Vidly/Screenshots/Movie%20api%20getonemovie.png" alt="MovieAPI" width="auto">
@@ -135,7 +149,7 @@ This project was built with the following applications, languages, and libraries
   </tr>
 </table>
 
-_Make sure you <a href="#">view the demo</a> to see more pages in action!_
+_Make sure you <a href="https://youtu.be/QJqpdvMKIGY">view the demo</a> to see more pages in action!_
 _Also, here's some <a href="https://github.com/lorenarms/Vidly/tree/master/Vidly/Screenshots">more screenshots</a> if you're interested_
 
 <!-- GETTING STARTED -->
