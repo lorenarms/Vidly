@@ -32,6 +32,7 @@ namespace Vidly.Controllers.API
 			var movies = _context.
 				Movies.
 				Include(m => m.Genre).
+				Where(m => m.NumberAvailable > 0).
 				ToList().
 				Select(_mapper.Map<Movie, MovieDTO>);
 

@@ -52,6 +52,10 @@
     {
       "library": "bootbox.js@6.0.0",
       "destination": "wwwroot/lib/bootbox.js/"
+    },
+    {
+      "library": "typeahead.js@0.11.1",
+      "destination": "wwwroot/lib/typeahead.js/"
     }
   ]
 }
