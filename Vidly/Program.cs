@@ -28,6 +28,7 @@ namespace Vidly
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddCors();
 
 			// add auto-mapper and initialize
 			// https://stackoverflow.com/questions/40275195/how-to-set-up-automapper-in-asp-net-core
@@ -57,7 +58,11 @@ namespace Vidly
 			app.UseHttpsRedirection();
 			app.UseStaticFiles();
 
+           
+
 			app.UseRouting();
+
+            app.UseCors();
 
 			app.UseAuthorization();
 

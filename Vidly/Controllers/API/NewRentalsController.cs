@@ -21,7 +21,7 @@ namespace Vidly.Controllers.API
 
 		[HttpPost]
 		[Route("/api/newRental")]
-		public IActionResult CreateNewRentals(NewRentalDTO newRental)
+		public IActionResult CreateNewRentals([FromForm] NewRentalDTO newRental)
 		{
 			var customer = _context.Customers.SingleOrDefault(
 				c => c.Id == newRental.CustomerId);
