@@ -56,6 +56,10 @@
     {
       "library": "typeahead.js@0.11.1",
       "destination": "wwwroot/lib/typeahead.js/"
+    },
+    {
+      "library": "toastr.js@2.1.4",
+      "destination": "wwwroot/lib/toastr.js/"
     }
   ]
 }

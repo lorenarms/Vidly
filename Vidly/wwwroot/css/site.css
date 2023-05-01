@@ -21,9 +21,10 @@ body {
   margin-bottom: 60px;
 }
 
-.field-validation-error {
+.field-validation-error, .error {
     color: red
 }
+
 
 .input-validation-error {
     border: 2px solid red

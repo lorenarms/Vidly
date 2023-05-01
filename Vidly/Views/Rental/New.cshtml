@@ -1,4 +1,5 @@
-﻿@{
+﻿@using Microsoft.CodeAnalysis.Scripting
+@{
 	ViewBag.Title = "New Rental Form";
 }
 
@@ -8,14 +9,14 @@
 	<div class="form-group mb-3">
 		<label>Customer</label>
 		<div class="tt-container">
-			<input id="customer" type="text" value="" class="form-control" placeholder="Customer Name"/>
+			<input id="customer" required type="text" value="" class="form-control" placeholder="Customer Name"/>
 		</div>
 	</div>
 	
 	<div class="form-group mb-3">
 		<label>Movie</label>
 		<div class="tt-container">
-			<input id="movie" type="text" value="" class="form-control" placeholder="Movie Title"/>
+			<input id="movie" required type="text" value="" class="form-control" placeholder="Movie Title"/>
 		</div>
 	</div>
 	
@@ -33,6 +34,8 @@
 
 @section Scripts
 {
+
+	<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 	<script>
 		$(document).ready(function() {
 
@@ -92,21 +95,25 @@
 					vm.movieIds.push(movie.id);
 				});
 
-			$("#new-rental").submit(function(e) {
-				e.preventDefault();
 
-				$.ajax({
-						url: "/api/newRental",
-						method: "post",
-						data: vm
+			$("#new-rental").validate({
+				submitHandler: function() {
+					
+					$.ajax({
+							url: "/api/newRental",
+							method: "post",
+							data: vm
 					})
-					.done(function() {
-						console.log("done");
+						.done(function() {
+							console.log("done");
 					})
-					.fail(function() {
+						.fail(function() {
 
 					});
+				}
 			});
+
+			
 		});
 
 	</script>
