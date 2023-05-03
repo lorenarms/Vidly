@@ -25,6 +25,10 @@ body {
     color: red
 }
 
+input.error {
+    border: 2px solid red
+}
+
 
 .input-validation-error {
     border: 2px solid red

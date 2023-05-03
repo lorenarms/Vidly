@@ -9,14 +9,14 @@
 	<div class="form-group mb-3">
 		<label>Customer</label>
 		<div class="tt-container">
-			<input id="customer" required type="text" value="" class="form-control" placeholder="Customer Name"/>
+			<input id="customer" name="customer" data-rule-validCustomer="true" required type="text" value="" class="form-control" placeholder="Customer Name"/>
 		</div>
 	</div>
 	
 	<div class="form-group mb-3">
 		<label>Movie</label>
 		<div class="tt-container">
-			<input id="movie" required type="text" value="" class="form-control" placeholder="Movie Title"/>
+			<input id="movie" name="movie" data-rule-atLeastOneMovie="true" type="text" value="" class="form-control" placeholder="Movie Title"/>
 		</div>
 	</div>
 	
@@ -36,6 +36,7 @@
 {
 
 	<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+	<script src="lib/toastr.js/toastr.min.js"></script>
 	<script>
 		$(document).ready(function() {
 
@@ -52,7 +53,7 @@
 					wildcard: '%QUERY'
 				}
 			});
-			
+
 			$('#customer').typeahead({
 					minLength: 3,
 					highlight: true
@@ -65,7 +66,6 @@
 				function(e, customer) {
 					vm.customerId = customer.id;
 				});
-
 
 
 			var movies = new Bloodhound({
@@ -87,7 +87,7 @@
 					display: 'name',
 					source: movies
 				}).on("typeahead:select",
-				function (e, movie) {
+				function(e, movie) {
 					$("#movies").append("<li class='list-group-item'>" + movie.name + "</li>");
 
 					$("#movie").typeahead("val", "");
@@ -95,25 +95,50 @@
 					vm.movieIds.push(movie.id);
 				});
 
+			$.validator.addMethod("validCustomer",
+				function() {
+					return vm.customerId && vm.customerId !== 0;
+				},
+				"Please select a valid customer.");
 
-			$("#new-rental").validate({
+			$.validator.addMethod("atLeastOneMovie",
+				function() {
+					return vm.movieIds.length > 0;
+				},
+				"Please select at least one movie.");
+
+			var validator = $("#new-rental").validate({
 				submitHandler: function() {
-					
+
 					$.ajax({
 							url: "/api/newRental",
 							method: "post",
 							data: vm
-					})
+						})
 						.done(function() {
 							console.log("done");
-					})
-						.fail(function() {
+							toastr.success("Rentals successfully recorded.");
 
-					});
+							$('#customer').typeahead("val", "");
+							$('#movie').typeahead("val", "");
+							$("#movies").empty();
+
+							vm = {
+								movieIds: []
+							};
+
+							validator.resetForm();
+
+						})
+						.fail(function() {
+							toastr.error("Something went wrong.");
+						});
+
+					return false;
 				}
 			});
 
-			
+
 		});
 
 	</script>
