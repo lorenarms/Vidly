@@ -271,7 +271,7 @@ Currently there is no license for this application, it is free to use by anyone 
 [issues-url]: https://github.com/lorenarms/Vidly/issues
 [license-shield]: https://img.shields.io/github/license/lorenarms/vidly.svg?style=for-the-badge
 [license-url]: https://github.com/lorenarms/vidly/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&color=blue
 [linkedin-url]: https://linkedin.com/in/lorenarms95
 
 
