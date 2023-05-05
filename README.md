@@ -78,7 +78,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 <p>
-<img src="https://github.com/lorenarms/Vidly/blob/master/Vidly/Screenshots/Movies%20index.png">
+<img src="https://github.com/lorenarms/Vidly/blob/master/Vidly/Screenshots/Vidly%20Showcase.gif">
 <p/>
 
 _Vidly Movies index showing Datatables_
@@ -146,6 +146,16 @@ Vidly also has a working API for both customers and movies. The API can be reach
   <tr>
     <td>Movie API "GetAllMovies"</td>
     <td>Movie API "GetMovieById"</td>
+  </tr>
+</table>
+
+Vidly makes use of some Javascript and related libraries like toastr and TypeAhead to display confirmation messages and show predictive type while a user searches for customers and movies.
+<table>
+  <tr>
+    <td><img src="https://github.com/lorenarms/Vidly/blob/master/Vidly/Screenshots/RentalPage.png" alt="RentalPage" width="auto">
+  </tr>
+  <tr>
+    <td>Rental Page</td>
   </tr>
 </table>
 
