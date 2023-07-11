@@ -84,7 +84,7 @@
 _Vidly Movies index showing Datatables_
 
 <p>
-This project, called "Vidly", is an ASP.NET Core web application built with C# (and a wee bit'o javascript). The project is a database for a video rental service consisting of a list of Movies to rent and Customers who can rent those movies. The proeject was built folowing the tutorial by Mosh Hamedani, which can be found <a href="https://codewithmosh.com/p/asp-net-mvc">here</a>.
+This project, called "Vidly", is an ASP.NET Core web application built with C# (and a wee bit'o javascript). It is a database for a video rental service consisting of a list of Movies to rent and Customers who can rent those movies. To build Vidly I folowed the tutorial by Mosh Hamedani, which can be found <a href="https://codewithmosh.com/p/asp-net-mvc">here</a>.
 </p>
 <img src="https://github.com/lorenarms/Vidly/blob/master/Vidly/Screenshots/Movies%20delete%20dialog.png">
 
@@ -93,7 +93,7 @@ _Using BootBox for pop-up dialogs_
 <p>
 Why did I choose this course?
 * I am passionate about C# coding and web development, and this course was a great way for me to get familiar with the ASP.NET and Entity frameworks
-* The course is quite old and therefore gave me a great opportunity to practice problem-solving as some of the techniques are outdated (but still work)
+* The course is quite old and therefore gave me a great opportunity to practice problem-solving. Some aspects of the tutorial don't work quite right due to updates in the framework, so I had to figure out new ways of getting things done
 * I think Mosh is awesome and a great teacher, this is not my first course with him! :smile:
 </p>
 <p>
